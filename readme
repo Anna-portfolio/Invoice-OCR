@@ -1,32 +1,63 @@
 # Invoice OCR Project
+A modular pipeline for preprocessing scanned documents and classifying their type (invoice, contract, ID card, etc.).
+The current version uses a PyTorch model for testing the end-to-end workflow.
 
 # Project Structure
 
--   `data/` - raw and processed invoices
--   `src/` - source code modules
--   `notebooks/` - experiments and development
--   `configs/` - YAML configuration files
--   `tests/` - unit tests
+Invoice_OCR/
+│
+├── data/
+│   ├── raw/                # raw input images
+├── └── processed/          # images after preprocessing
+│
+├── models/
+│   └── document_classifier.pt   # dummy model (auto-generated)
+│
+├── src/
+│   ├── preprocessing/       # image preprocessing modules
+│   └── classification/      # model + inference pipeline
+│
+├── notebooks/               # experiments & prototypes
+├── configs/                 # YAML configuration files
+└── tests/                   # unit tests
 
-# Description
 
-Pipeline for preprocessing scanned invoices:
 
--   Denoising
--   Gamma correction
--   CLAHE (local contrast)
--   Linear brightening
--   Deskew (Hough lines)
--   Orientation normalization (±90° / 180°)
+#Preprocessing Pipeline
+The preprocessing module applies several operations to normalize image quality before classification:
+Denoising – removes image noise
+Gamma correction – normalizes exposure
+CLAHE – boosts local contrast
+Linear brightening – additional brightness adjustment
+Deskew (Hough Transform) – fixes rotation/skew
+Orientation normalization – rotates documents by ±90° or 180° if required
+
+This produces a high-quality, normalized image suitable for classification or OCR.
 
 # Usage
 
-```python
-from src.preprocessing.pipeline import preprocess_invoice_pipeline
+def run():
+    # 1. Paths
+    raw_image = "data/raw/invoice_original.png"
+    preprocessed_image = "data/processed/invoice_preprocessed.png"
+    model_path = "models/document_classifier.pt"
 
-processed_img = preprocess_invoice_pipeline(
-    "data/raw/invoice_original.png",
-    "data/processed/invoice_preprocessed.png",
-    rotate_180=True
-)
-```
+    os.makedirs(os.path.dirname(preprocessed_image), exist_ok=True)
+
+    # 1. Preprocessing
+    processed = preprocess_invoice_pipeline(
+        image_path=raw_image,
+        output_path=preprocessed_image
+    )
+
+    # 2. Classification
+    result = classify_document(
+        image_path=preprocessed_image,
+        model_path=model_path
+    )
+
+    # 3. Result
+    print("Prediction result:", result)
+
+
+
