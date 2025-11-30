@@ -1,0 +1,32 @@
+# Invoice OCR Project
+
+# Project Structure
+
+-   `data/` - raw and processed invoices
+-   `src/` - source code modules
+-   `notebooks/` - experiments and development
+-   `configs/` - YAML configuration files
+-   `tests/` - unit tests
+
+# Description
+
+Pipeline for preprocessing scanned invoices:
+
+-   Denoising
+-   Gamma correction
+-   CLAHE (local contrast)
+-   Linear brightening
+-   Deskew (Hough lines)
+-   Orientation normalization (±90° / 180°)
+
+# Usage
+
+```python
+from src.preprocessing.pipeline import preprocess_invoice_pipeline
+
+processed_img = preprocess_invoice_pipeline(
+    "data/raw/invoice_original.png",
+    "data/processed/invoice_preprocessed.png",
+    rotate_180=True
+)
+```
