@@ -1,4 +1,7 @@
 # Invoice OCR Project
+
+created by Anna Dudek @Anna-portfolio
+
 A modular pipeline for preprocessing scanned documents and classifying their type (invoice, contract, ID card, etc.).
 The current version uses a PyTorch model for testing the end-to-end workflow.
 
@@ -58,6 +61,7 @@ def run():
 
     # 3. Result
     print("Prediction result:", result)
+
 
 
 
