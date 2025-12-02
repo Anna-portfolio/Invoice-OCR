@@ -69,3 +69,4 @@ def run():
 
     # 3. Result
     print("Prediction result:", result)
+
