@@ -9,7 +9,7 @@ The current version uses a PyTorch model for testing the end-to-end workflow.
 <br>
 
 ## Project Structure
-
+```
 Invoice_OCR/
 │
 ├── data/
@@ -26,9 +26,9 @@ Invoice_OCR/
 ├── notebooks/ # Experiments & prototypes
 ├── configs/ # YAML configuration files
 └── tests/ # Unit tests
+```
 
 
-<br>
 
 ## Preprocessing Pipeline
 
@@ -69,4 +69,5 @@ def run():
 
     # 3. Result
     print("Prediction result:", result)
+
 
