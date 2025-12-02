@@ -2,43 +2,51 @@
 
 created by Anna Dudek @Anna-portfolio
 
-A modular pipeline for preprocessing scanned documents and classifying their type (invoice, contract, ID card, etc.).
-The current version uses a PyTorch model for testing the end-to-end workflow.
+## Overview
 
-# Project Structure
+A modular pipeline for preprocessing scanned documents and classifying their type (invoice, contract, ID card, etc.).  
+The current version uses a PyTorch model for testing the end-to-end workflow.  
+<br>
+
+## Project Structure
 
 Invoice_OCR/
 │
 ├── data/
-│   ├── raw/                # raw input images
-├── └── processed/          # images after preprocessing
+│ ├── raw/ # Raw input images
+│ └── processed/ # Images after preprocessing
 │
 ├── models/
-│   └── document_classifier.pt   # dummy model (auto-generated)
+│ └── document_classifier.pt # Dummy model (auto-generated)
 │
 ├── src/
-│   ├── preprocessing/       # image preprocessing modules
-│   └── classification/      # model + inference pipeline
+│ ├── preprocessing/ # Image preprocessing modules
+│ └── classification/ # Model + inference pipeline
 │
-├── notebooks/               # experiments & prototypes
-├── configs/                 # YAML configuration files
-└── tests/                   # unit tests
+├── notebooks/ # Experiments & prototypes
+├── configs/ # YAML configuration files
+└── tests/ # Unit tests
 
 
+<br>
 
-#Preprocessing Pipeline
+## Preprocessing Pipeline
+
 The preprocessing module applies several operations to normalize image quality before classification:
-Denoising – removes image noise
-Gamma correction – normalizes exposure
-CLAHE – boosts local contrast
-Linear brightening – additional brightness adjustment
-Deskew (Hough Transform) – fixes rotation/skew
-Orientation normalization – rotates documents by ±90° or 180° if required
 
-This produces a high-quality, normalized image suitable for classification or OCR.
+* **Denoising** – removes image noise  
+* **Gamma correction** – normalizes exposure  
+* **CLAHE** – boosts local contrast  
+* **Linear brightening** – additional brightness adjustment  
+* **Deskew (Hough Transform)** – fixes rotation/skew  
+* **Orientation normalization** – rotates documents by ±90° or 180° if required  
 
-# Usage
+These steps produce a high-quality, normalized image suitable for classification or OCR.  
+<br>
 
+## Usage
+
+```python
 def run():
     # 1. Paths
     raw_image = "data/raw/invoice_original.png"
@@ -61,7 +69,3 @@ def run():
 
     # 3. Result
     print("Prediction result:", result)
-
-
-
-
